@@ -1,0 +1,37 @@
+[
+    {
+        "nom": "Frêne",
+        "type": "Bois",
+        "fournisseur": "BBois"
+    },
+    {
+        "nom": "Chêne",
+        "type": "Bois",
+        "fournisseur": "BBois"
+    },
+    {
+        "nom": "Noyer",
+        "type": "Bois",
+        "fournisseur": "BBois"
+    },
+    {
+        "nom": "Acier",
+        "type": "Fer",
+        "fournisseur": "MetaLo"
+    },
+    {
+        "nom": "Inox",
+        "type": "Fer",
+        "fournisseur": "MetaLo"
+    },
+    {
+        "nom": "Aluminium",
+        "type": "Fer",
+        "fournisseur": "MetaLo"
+    },
+    {
+        "nom": "Plastique",
+        "type": "Plastique",
+        "fournisseur": "pPlastique"
+    }
+]

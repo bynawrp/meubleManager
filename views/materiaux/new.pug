@@ -1,0 +1,42 @@
+extends ../layout
+
+block content
+  .row
+    .col-md-8.mx-auto
+      .card
+        .card-header Nouveau matériau
+        .card-body
+          if error
+            .alert.alert-danger.mb-3
+              i(data-feather='alert-triangle').feather-icon-md
+              | #{error}
+          
+          form(action='/materiaux', method='POST')
+            .mb-3
+              label.form-label(for='nom') Nom *
+              input#nom.form-control(type='text', name='nom', required)
+            
+            .mb-3
+              label.form-label(for='type') Type *
+              select#type.form-select(name='type', required)
+                option(value='') Sélectionner un type
+                option(value='Bois') Bois
+                option(value='Fer') Fer
+                option(value='Plastique') Plastique
+            
+            .mb-3
+              label.form-label(for='fournisseur') Fournisseur *
+              select#fournisseur.form-select(name='fournisseur', required)
+                option(value='') Sélectionner un fournisseur
+                each fourn in fournisseurs
+                  option(value=fourn._id)= fourn.nom
+            
+            .mb-3
+              label.form-label(for='description') Description
+              textarea#description.form-control(name='description', rows='3')
+            
+            .d-flex.justify-content-between
+              a.btn.btn-secondary(href='/materiaux') Annuler
+              button.btn.btn-primary(type='submit')
+                i(data-feather='save').feather-icon-md
+                | Enregistrer

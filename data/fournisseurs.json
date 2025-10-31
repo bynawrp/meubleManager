@@ -1,0 +1,15 @@
+[
+  {
+    "nom": "BBois",
+    "description": "Fournisseur de bois"
+  },
+  {
+    "nom": "MetaLo",
+    "description": "Fournisseur de métaux"
+  },
+  {
+    "nom": "pPlastique",
+    "description": "Fournisseur de plastique"
+  }
+]
+

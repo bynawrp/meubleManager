@@ -1,0 +1,32 @@
+{
+    "name": "meuble-manager",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "nodemon server.js",
+        "seed": "node scripts/seed.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "chart.js": "^4.5.1",
+        "connect-mongo": "^5.1.0",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "express-session": "^1.17.3",
+        "express-validator": "^7.0.1",
+        "feather-icons": "^4.29.2",
+        "method-override": "^3.0.0",
+        "mongoose": "^8.0.3",
+        "pug": "^3.0.3"
+    },
+    "devDependencies": {
+        "eslint": "^8.55.0",
+        "nodemon": "^3.0.2",
+        "pdf-lib": "^1.17.1"
+    }
+}

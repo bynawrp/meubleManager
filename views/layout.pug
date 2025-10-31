@@ -1,0 +1,56 @@
+doctype html
+html(lang='fr')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title= title + ' - Meuble Manager'
+    link(href='/css/app.min.css', rel='stylesheet')
+    
+  body#page-top
+    #wrapper
+      ul#accordionSidebar.sidebar
+        li.sidebar-brand
+          a.sidebar-brand-text(href='/dashboard')
+            .sidebar-brand-icon
+              i(data-feather='package').feather-icon-xl
+            span Meuble Manager
+        
+        if user
+          li.sidebar-heading Interface
+
+          li.nav-item
+            a.nav-link(href='/dashboard', class=(currentPage === 'dashboard' ? 'active' : ''))
+              i(data-feather='grid').icon-nav
+              span Dashboard
+          
+          li.nav-item
+            a.nav-link(href='/meubles', class=(currentPage === 'meubles' ? 'active' : ''))
+              i(data-feather='package').icon-nav
+              span Mes meubles
+          
+          li.nav-item
+              a.nav-link(href='/auth/logout')
+                i(data-feather='log-out').icon-nav
+                span Déconnexion
+      
+      #content-wrapper.d-flex.flex-column
+        #content
+          nav.topbar
+            button#sidebarToggleTop.btn.btn-link.d-md-none.btn-link-custom(type='button')
+              i(data-feather='menu').feather-icon-lg
+            
+            ul.navbar-nav
+              li.nav-item
+                a.nav-link(href='#')
+                  span.me-2.d-none.d-lg-inline= user ? user.username : 'Invité'
+                  i(data-feather='user').icon-nav-lg
+          
+          .container-fluid
+            block content
+    
+    a.scroll-to-top.rounded(href='#page-top')
+      i(data-feather='arrow-up').feather-icon-lg
+    
+    script(src='/js/feather.min.js')
+    script(src='/js/main.js')
+    block scripts

@@ -1,0 +1,67 @@
+[
+  {
+    "nom": "Armoire moderne",
+    "categorie": "Armoire",
+    "description": "Armoire élégante en chêne et acier",
+    "materiaux": [
+      { "materiau": "Chêne", "quantite": 5 },
+      { "materiau": "Acier", "quantite": 3 }
+    ],
+    "tags": ["moderne", "élégant"],
+    "realisations": 2
+  },
+  {
+    "nom": "Etagère suspendue",
+    "categorie": "Etagère",
+    "description": "Etagère minimaliste en frêne",
+    "materiaux": [
+      { "materiau": "Frêne", "quantite": 3 },
+      { "materiau": "Aluminium", "quantite": 2 }
+    ],
+    "tags": ["minimaliste", "suspension"],
+    "realisations": 5
+  },
+  {
+    "nom": "Armoire classique",
+    "categorie": "Armoire",
+    "description": "Armoire traditionnelle en noyer",
+    "materiaux": [
+      { "materiau": "Noyer", "quantite": 8 }
+    ],
+    "tags": ["classique", "traditionnel"],
+    "realisations": 1
+  },
+  {
+    "nom": "Armoire contemporaine",
+    "categorie": "Armoire",
+    "description": "Armoire moderne en chêne",
+    "materiaux": [
+      { "materiau": "Chêne", "quantite": 6 },
+      { "materiau": "Aluminium", "quantite": 2 }
+    ],
+    "tags": ["contemporain"],
+    "realisations": 3
+  },
+  {
+    "nom": "Etagère murale",
+    "categorie": "Etagère",
+    "description": "Etagère en frêne et acier",
+    "materiaux": [
+      { "materiau": "Frêne", "quantite": 4 },
+      { "materiau": "Acier", "quantite": 3 }
+    ],
+    "tags": ["murale"],
+    "realisations": 2
+  },
+  {
+    "nom": "Commode en noyer",
+    "categorie": "Armoire",
+    "description": "Commode traditionnelle",
+    "materiaux": [
+      { "materiau": "Noyer", "quantite": 10 }
+    ],
+    "tags": ["classique"],
+    "realisations": 4
+  }
+]
+

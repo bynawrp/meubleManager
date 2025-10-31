@@ -1,0 +1,49 @@
+extends ../layout
+
+block content
+  a.btn.btn-secondary.mb-3(href='javascript:history.back()')
+    i(data-feather='arrow-left').feather-icon-md
+    | Retour
+  .page-header.mb-4
+    h1.mb-0
+      | Meubles - Tag: 
+      span.badge.bg-primary= tag
+    p.text-muted.mb-0 Meubles associés au tag "#{tag}"
+  
+  if meubles && meubles.length > 0
+    .row
+      each meuble in meubles
+        .col-md-6.col-lg-3.mb-3
+          .card.h-100
+            .card-header
+              .d-flex.justify-content-between.align-items-center
+                h6.mb-0= meuble.nom
+                if meuble.categorie
+                  span.badge.bg-primary.badge-sm= meuble.categorie.nom
+            .card-body
+              if meuble.description
+                p.card-text.text-muted.small.mb-2.text-clamp-2= meuble.description
+              
+              if meuble.tags && meuble.tags.length > 0
+                .mb-2
+                  each tagItem in meuble.tags
+                    a.badge.bg-secondary.me-1.mb-1.badge-sm.link-no-decoration(href='/materiaux/tag/' + encodeURIComponent(tagItem))= tagItem
+              
+              .row.mb-2
+                .col-6
+                  .text-center.p-2.card-stats
+                    .text-muted.small.text-small-custom Matériaux
+                    strong.d-block.badge-primary-custom= meuble.materiaux && meuble.materiaux.length > 0 ? meuble.materiaux.length : 0
+                .col-6
+                  .text-center.p-2.card-stats
+                    .text-muted.small.text-small-custom Réalisations
+                    strong.d-block.badge-success-custom= meuble.realisations || 0
+            
+            .card-footer.card-footer-sm
+              a.btn.btn-primary.btn-sm.w-100(href='/meubles/' + meuble._id)
+                i(data-feather='eye').feather-icon-sm
+                | Détails
+  else
+    .alert.alert-info
+      i(data-feather='info').feather-icon-md
+      | Aucun meuble trouvé avec ce tag

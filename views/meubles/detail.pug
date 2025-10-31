@@ -1,0 +1,72 @@
+extends ../layout
+
+block content
+  .mb-4
+    a.btn.btn-secondary(href='/meubles')
+      i(data-feather='arrow-left').feather-icon-md
+      | Retour
+  
+  .row
+    .col-lg-6.mb-4
+      .card.h-100
+        .card-header= meuble.nom
+        .card-body
+          .mb-3
+            .text-muted.small.mb-1 Catégorie
+            if meuble.categorie
+              span.badge.bg-primary= meuble.categorie.nom
+            else
+              span.text-muted N/A
+          
+          if meuble.description
+            .mb-3
+              .text-muted.small.mb-1 Description
+              p.mb-0= meuble.description
+          
+          if meuble.tags && meuble.tags.length > 0
+            .mb-3
+              .text-muted.small.mb-1 Tags
+              div
+                each tag in meuble.tags
+                  a.badge.bg-secondary.me-1.mb-1.link-no-decoration(href='/materiaux/tag/' + encodeURIComponent(tag))= tag
+          
+          .mb-3
+            .text-muted.small.mb-1 Réalisations
+            span.badge.bg-success.fs-5= meuble.realisations || 0
+          
+          .mb-0
+            .text-muted.small.mb-1 Créé le
+            strong.d-block.text-muted= new Date(meuble.createdAt).toLocaleDateString('fr-FR')
+    
+    .col-lg-6.mb-4
+      .card.h-100
+        .card-header Matériaux utilisés
+        .card-body
+          if meuble.materiaux && meuble.materiaux.length > 0
+            .mb-3
+              .d-flex.justify-content-between.align-items-center
+                .text-muted.small Nombre de matériaux
+                strong.fs-5= meuble.materiaux.length
+            .mb-3
+              .d-flex.justify-content-between.align-items-center
+                .text-muted.small Quantité totale
+                strong.fs-5= meuble.materiaux.reduce((sum, m) => sum + (m.quantite || 1), 0)
+            
+            .mb-0
+              .table-responsive
+                table.table.mb-0
+                  thead
+                    tr
+                      th Matériau
+                      th Type
+                      th.text-center Quantité
+                  tbody
+                    each item in meuble.materiaux
+                      if item.materiau
+                        tr
+                          td= item.materiau.nom
+                          td
+                            span.badge.bg-info= item.materiau.type
+                          td.text-center= item.quantite || 1
+          else
+            .text-muted Aucun matériau associé

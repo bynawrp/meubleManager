@@ -1,0 +1,65 @@
+extends ../layout
+
+block content
+  .row
+    .col-md-8.mx-auto
+      .card
+        .card-header Nouveau meuble
+        .card-body
+          if error
+            .alert.alert-danger.mb-3
+              i(data-feather='alert-triangle').feather-icon-md
+              | #{error}
+          form(action='/meubles', method='POST')
+            .mb-3
+              label.form-label(for='nom') Nom *
+              input#nom.form-control(type='text', name='nom', required)
+            
+            .mb-3
+              label.form-label(for='categorie') Catégorie *
+              select#categorie.form-select(name='categorie', required)
+                option(value='') Sélectionner une catégorie
+                each cat in categories
+                  option(value=cat._id)= cat.nom
+            
+            .mb-3
+              label.form-label(for='description') Description
+              textarea#description.form-control(name='description', rows='3')
+            
+            .mb-3
+              label.form-label(for='tags') Tags (séparés par des virgules)
+              input#tags.form-control(type='text', name='tags', placeholder='ex: moderne, élégant')
+            
+            .mb-3
+              label.form-label(for='realisations') Nombre de réalisations *
+              input#realisations.form-control(type='number', name='realisations', value='1', min='1', required)
+            
+            .mb-3
+              label.form-label Matériaux *
+              .row.g-3#materiauxContainer(data-materiaux-options=JSON.stringify(materiaux.map(m => ({id: m._id, nom: m.nom, type: m.type}))))
+                .col-12
+                  .card.card-border-custom
+                    .card-body
+                      .row
+                        .col-md-6
+                          select.form-select.materiau-select(name='materiaux[materiau][]', required)
+                            option(value='') Sélectionner un matériau
+                            each mat in materiaux
+                              option(value=mat._id)= mat.nom + ' (' + mat.type + ')'
+                        .col-md-4
+                          input.form-control(type='number', name='materiaux[quantite][]', placeholder='Quantité', value='1', min='1', required)
+                        .col-md-2
+                          button.btn.btn-secondary.btn-border-theme.btn-remove-materiau(type='button')
+                            i(data-feather='trash').feather-icon-md
+              small.text-muted.d-block.mb-2 Au moins un matériau est requis
+              button.btn.btn-sm.btn-secondary.btn-add-materiau(type='button')
+                i(data-feather='plus').feather-icon-sm
+                | Ajouter un matériau
+            
+            .d-flex.justify-content-between
+              a.btn.btn-secondary(href='/meubles') Annuler
+              button.btn.btn-primary(type='submit')
+                i(data-feather='save').feather-icon-md
+                | Enregistrer
+
+block scripts

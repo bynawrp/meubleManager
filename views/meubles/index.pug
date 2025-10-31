@@ -1,0 +1,70 @@
+extends ../layout
+
+block content
+  .d-flex.justify-content-between.align-items-center.mb-4
+    .page-header.mb-0
+      h1.mb-0 Mes meubles
+    a.btn.btn-primary(href='/meubles/new')
+      i(data-feather='plus').feather-icon-md
+      | Nouveau meuble
+  
+  .card.mb-4
+    .card-header Filtres
+    .card-body
+      form#filterForm.row.g-3(method='GET', action='/meubles')
+        .col-md-4
+          label.form-label Recherche
+          input#searchInput.form-control(type='text', name='search', placeholder='Rechercher...', value=filters.search, autocomplete='off')
+        .col-md-3
+          label.form-label Catégorie
+          select#categorieSelect.form-select(name='categorie')
+            option(value='') Toutes les catégories
+            each cat in categories
+              option(value=cat._id, selected=filters.categorie==cat._id)= cat.nom
+        .col-md-3
+          label.form-label Tag
+          input#tagInput.form-control(type='text', name='tag', placeholder='Tag', value=filters.tag, autocomplete='off')
+        .col-md-2.d-flex.align-items-end
+          a.btn.btn-secondary.w-100(href='/meubles')
+            i(data-feather='x').feather-icon-sm
+            | Effacer
+  
+  if meubles.length > 0
+    .row
+      each meuble in meubles
+        .col-md-6.col-lg-3.mb-3
+          .card.h-100
+            .card-header
+              .d-flex.justify-content-between.align-items-center
+                h6.mb-0= meuble.nom
+                if meuble.categorie
+                  span.badge.bg-primary.badge-sm= meuble.categorie.nom
+            .card-body
+              if meuble.description
+                p.card-text.text-muted.small.mb-2.text-clamp-2= meuble.description
+              
+              if meuble.tags && meuble.tags.length > 0
+                .mb-2
+                  each tag in meuble.tags
+                    a.badge.bg-secondary.me-1.mb-1.badge-sm.link-no-decoration(href='/materiaux/tag/' + encodeURIComponent(tag))= tag
+              
+              .row.mb-2
+                .col-6
+                  .text-center.p-2.card-stats
+                    .text-muted.small.text-small-custom Matériaux
+                    strong.d-block.badge-primary-custom= meuble.materiaux && meuble.materiaux.length > 0 ? meuble.materiaux.length : 0
+                .col-6
+                  .text-center.p-2.card-stats
+                    .text-muted.small.text-small-custom Réalisations
+                    strong.d-block.badge-success-custom= meuble.realisations || 0
+            
+            .card-footer.card-footer-sm
+              a.btn.btn-primary.btn-sm.w-100(href='/meubles/' + meuble._id)
+                i(data-feather='eye').feather-icon-sm
+                | Détails
+  else
+    .alert.alert-info
+      i(data-feather='info').feather-icon-md
+      | Aucun meuble trouvé
+
+block scripts

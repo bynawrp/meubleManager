@@ -1,0 +1,38 @@
+doctype html
+html(lang='fr')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title= title + ' - Meuble Manager'
+    link(href='/css/app.min.css', rel='stylesheet')
+  
+  body.login-page
+    .login-wrapper
+      .card.login-card
+        .card-body.login-card-body
+          .text-center.mb-4
+            .login-icon
+              i(data-feather='package', class='icon-2xl icon-white')
+            h2.mb-2 Meuble Manager
+            p.text-muted Connexion à votre compte
+          
+          if error
+            .alert.alert-danger.mb-3
+              i(data-feather='alert-triangle', class='icon-md')
+              | #{error}
+          
+          form(action='/auth/login', method='POST')
+            .mb-3
+              label.form-label Nom d'utilisateur
+              input.form-control(type='text', name='username', placeholder='Entrez votre nom d\'utilisateur', required, autofocus)
+            
+            .mb-4
+              label.form-label Mot de passe
+              input.form-control(type='password', name='password', placeholder='Entrez votre mot de passe', required)
+            
+            button.btn.btn-primary.w-100.btn-submit-custom(type='submit')
+              | Se connecter
+              i(data-feather='arrow-right', class='icon-md')
+    
+    script(src='/js/feather.min.js')
+    script(src='/js/main.js')

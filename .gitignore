@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs/
+*.log
+
+# Build
+dist/
+build/
+
+# Temporary files
+tmp/
+temp/
+

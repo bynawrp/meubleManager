@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  .text-center.py-5
+    i(data-feather='alert-triangle').feather-icon-error
+    h1.mt-4 404
+    h4.alert-title Page non trouvée
+    p.text-muted La page que vous recherchez n'existe pas.
+    a.btn.btn-primary(href='/dashboard')
+      i(data-feather='home').feather-icon-md
+      | Retour à l'accueil
+

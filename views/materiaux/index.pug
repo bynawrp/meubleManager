@@ -1,0 +1,73 @@
+extends ../layout
+
+block content
+  .d-flex.justify-content-between.align-items-center.mb-4
+    .page-header.mb-0
+      h1.mb-0
+        i(data-feather='package').feather-icon-xl
+        | Gestion des matériaux
+      p.text-muted.mb-0 Liste des matériaux disponibles
+    a.btn.btn-primary(href='/materiaux/new')
+      i(data-feather='plus').feather-icon-md
+      | Nouveau matériau
+  
+  .card.mb-4
+    .card-header Filtres
+    .card-body
+      form.row.g-3(method='GET')
+        .col-md-4
+          label.form-label Type
+          select.form-select(name='type')
+            option(value='') Tous les types
+            option(value='Bois', selected=filters.type=='Bois') Bois
+            option(value='Fer', selected=filters.type=='Fer') Fer
+            option(value='Plastique', selected=filters.type=='Plastique') Plastique
+        .col-md-4
+          label.form-label Fournisseur
+          select.form-select(name='fournisseur')
+            option(value='') Tous les fournisseurs
+            each fourn in fournisseurs
+              option(value=fourn._id, selected=filters.fournisseur==fourn._id)= fourn.nom
+        .col-md-4.d-flex.align-items-end
+          button.btn.btn-primary.me-2(type='submit')
+            i(data-feather='search').feather-icon-sm
+            | Filtrer
+          a.btn.btn-secondary(href='/materiaux')
+            i(data-feather='x').feather-icon-sm
+            | Effacer
+  
+  if materiaux.length > 0
+    .card
+      .card-header Liste des matériaux
+      .card-body
+        .table-responsive
+          table.table
+            thead
+              tr
+                th Nom
+                th Type
+                th Fournisseur
+                th Action
+            tbody
+              each materiau in materiaux
+                tr
+                  td
+                    strong= materiau.nom
+                  td
+                    span.badge.bg-info= materiau.type
+                  td
+                    if materiau.fournisseur
+                      = materiau.fournisseur.nom
+                  td
+                    .btn-group
+                      a.btn.btn-sm.btn-primary(href='/materiaux/' + materiau._id)
+                        i(data-feather='eye').feather-icon-sm
+                        | Voir
+                      a.btn.btn-sm.btn-secondary(href='/materiaux/' + materiau._id + '/edit')
+                        i(data-feather='edit').feather-icon-sm
+                        | Modifier
+  else
+    .alert.alert-info
+      i(data-feather='info').feather-icon-md
+      | Aucun matériau trouvé
+

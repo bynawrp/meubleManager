@@ -1,0 +1,45 @@
+extends ../layout
+
+block content
+  .d-flex.justify-content-between.align-items-center.mb-4
+    a.btn.btn-secondary(href='/materiaux/' + materiau._id)
+      i(data-feather='arrow-left').feather-icon-md
+      | Retour
+  
+  .row
+    .col-md-8.mx-auto
+      .card
+        .card-header Modifier le matériau
+        .card-body
+          if error
+            .alert.alert-danger.mb-3
+              i(data-feather='alert-triangle').feather-icon-md
+              | #{error}
+          
+          form(action='/materiaux/' + materiau._id + '?_method=PUT', method='POST')
+            .mb-3
+              label.form-label(for='nom') Nom *
+              input#nom.form-control(type='text', name='nom', value=materiau.nom, required)
+            
+            .mb-3
+              label.form-label(for='type') Type *
+              select#type.form-select(name='type', required)
+                option(value='Bois', selected=materiau.type==='Bois') Bois
+                option(value='Fer', selected=materiau.type==='Fer') Fer
+                option(value='Plastique', selected=materiau.type==='Plastique') Plastique
+            
+            .mb-3
+              label.form-label(for='fournisseur') Fournisseur *
+              select#fournisseur.form-select(name='fournisseur', required)
+                each fourn in fournisseurs
+                  option(value=fourn._id, selected=materiau.fournisseur && materiau.fournisseur._id.equals(fourn._id))= fourn.nom
+            
+            .mb-3
+              label.form-label(for='description') Description
+              textarea#description.form-control(name='description', rows='3')= materiau.description || ''
+            
+            .d-flex.justify-content-between
+              a.btn.btn-secondary(href='/materiaux/' + materiau._id) Annuler
+              button.btn.btn-primary(type='submit')
+                i(data-feather='save').feather-icon-md
+                | Enregistrer

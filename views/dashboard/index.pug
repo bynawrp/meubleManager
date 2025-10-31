@@ -1,0 +1,72 @@
+extends ../layout
+
+block content
+  .page-header.mb-4
+    h1 Dashboard
+    p.text-muted Vue d'ensemble
+  
+  .row
+    .col-xl-6.col-lg-6.mb-4
+      .stats-card.primary
+        .stats-card-header
+          .stats-card-icon.primary
+            i(data-feather='package').feather-icon-xl
+        .stats-card-title Mes meubles
+        .stats-card-value= stats.totalMeubles
+    
+    .col-xl-6.col-lg-6.mb-4
+      .stats-card.success
+        .stats-card-header
+          .stats-card-icon.success
+            i(data-feather='check').feather-icon-xl
+        .stats-card-title Total réalisations
+        .stats-card-value= stats.totalRealisations
+  
+  .row
+    .col-xl-6.col-lg-6.mb-4
+      .card
+        .card-header Répartition des matériaux
+        .card-body
+          canvas#chartMateriaux.chart-container(data-chart-materiaux=stats.chartMateriaux || '[]')
+    
+    .col-xl-6.col-lg-6.mb-4
+      .card
+        .card-header Répartition des fournisseurs
+        .card-body
+          canvas#chartFournisseurs.chart-container(data-chart-fournisseurs=stats.chartFournisseurs || '[]')
+  
+  .row
+    .col-xl-6.col-lg-6.mb-4
+      .card
+        .card-header Nombre de meubles par catégorie
+        .card-body.chart-body-tall
+          canvas#chartCategories.chart-container-full(data-chart-categories=stats.chartCategories || '[]')
+    
+    .col-xl-6.col-lg-6.mb-4
+      .card
+        .card-header Meubles les plus produits
+        .card-body
+          if stats.topMeubles && stats.topMeubles.length > 0
+            .table-responsive
+              table.table
+                thead
+                  tr
+                    th(scope='col') #
+                    th(scope='col') Nom du meuble
+                    th(scope='col') Catégorie
+                    th(scope='col').table-center Réalisations
+                tbody
+                  each meuble, index in stats.topMeubles
+                    tr
+                      td= index + 1
+                      td
+                        strong= meuble.nom
+                      td
+                        span.badge.bg-info= meuble.categorie
+                      td.table-center
+                        span.badge.bg-success= meuble.realisations
+          else
+            .alert.alert-info.mb-0 Aucun meuble produit pour le moment
+
+block scripts
+  script(src='/js/chart.min.js')

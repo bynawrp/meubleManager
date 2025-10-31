@@ -1,0 +1,46 @@
+extends ../layout
+
+block content
+  .d-flex.justify-content-between.align-items-center.mb-4
+    a.btn.btn-secondary(href='/materiaux')
+      i(data-feather='arrow-left').feather-icon-md
+      | Retour à la liste
+    a.btn.btn-primary.me-2(href='/materiaux/' + materiau._id + '/edit')
+      i(data-feather='edit').feather-icon-md
+      | Modifier
+  
+  .card.mb-4
+    .card-header Informations
+    .card-body
+      h2.mb-4.title-large= materiau.nom
+      
+      .row
+        .col-md-6.mb-3
+          .d-flex.align-items-center
+            i(data-feather='tag').feather-icon-primary
+            div
+              .text-muted.small.mb-1 Type
+              span.badge.bg-info= materiau.type
+        
+        .col-md-6.mb-3
+          .d-flex.align-items-center
+            i(data-feather='building').feather-icon-secondary
+            div
+              .text-muted.small.mb-1 Fournisseur
+              if materiau.fournisseur
+                strong= materiau.fournisseur.nom
+              else
+                span.text-muted N/A
+      
+      if materiau.description
+        .mb-3
+          .text-muted.small.mb-2
+            i(data-feather='file-text').feather-icon-sm
+            | Description
+          p.mb-0.description-text= materiau.description
+      else
+        .mb-3
+          .text-muted.small.mb-2
+            i(data-feather='file-text').feather-icon-sm
+            | Description
+          p.mb-0.text-muted Aucune description disponible
